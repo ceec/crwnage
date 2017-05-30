@@ -9,3 +9,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+id_rsa.pub
