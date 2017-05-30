@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/','DisplayController@index');
+
+Route::get('/members','DisplayController@members');
+
+
+Route::get('/character/{name}','DisplayController@character');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+//data gathering
+
+Route::get('/data/news','DataController@news');
+Route::get('/data/members','DataController@members');
