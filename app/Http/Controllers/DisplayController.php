@@ -19,13 +19,13 @@ class DisplayController extends Controller {
      */
     public function index() {
 
-
+        echo 'work please';
         //get the last like 20? news
 
-        $news = News::take(15)->orderBy('timestamp','desc')->get();
+        //$news = News::take(15)->orderBy('timestamp','desc')->get();
 
-        return view('pages.index')
-        ->with('news',$news);
+       // return view('pages.index')
+       // ->with('news',$news);
     }
 
 
