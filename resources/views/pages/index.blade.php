@@ -81,3 +81,5 @@ cwrnagecrew.com
 	</div>
 </div>
 <script type="text/javascript" src="//wow.zamimg.com/widgets/power.js"></script><script>var wowhead_tooltips = { "colorlinks": true, "iconizelinks": true, "renamelinks": true }</script>
+
+@stop
