@@ -21,7 +21,7 @@ class DisplayController extends Controller {
 
         //get the last like 20? news
 
-        $news = News::take(15)->orderBy('timestamp','desc')->get();
+        $news = News::take(50)->orderBy('timestamp','desc')->get();
 
        return view('pages.index')
        ->with('news',$news);
@@ -75,7 +75,7 @@ class DisplayController extends Controller {
 
         //get the last like 20? news
 
-        $members = Character::all();
+        $members = Character::where('active','=',1)->get();
 
         return view('pages.members')
         ->with('members',$members);

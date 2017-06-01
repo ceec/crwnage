@@ -57,6 +57,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">                           
                   <li><a href="/members">Members</a></li>
+                  <li><a href="/forum">Forum</a></li>
                    
                                   <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -117,7 +118,6 @@
       </div>
       <div class="col-md-4">
         <br>
-        <a class="navbar-right" href="/contact">Contact Us</a>
       </div>
     </div>
   </div>

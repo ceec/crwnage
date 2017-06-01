@@ -67,7 +67,6 @@ class DataController extends Controller {
 
         foreach($test->news as $item) {
 
-
             //check if its already there
 
             $check = News::where('timestamp','=',$item->timestamp)->where('character','=',$item->character)->where('type','=',$item->type)->first();
@@ -81,6 +80,13 @@ class DataController extends Controller {
                 //match from character id
                 $n->user_id = 1;
                 $n->character = $item->character;
+
+                //get the character id from the db
+
+                $c = Character::where('character','=',$item->character)->first();
+
+                $n->character_id = $c->id;
+
                 $n->type = $item->type;
                 $n->timestamp = $item->timestamp;
 
@@ -90,15 +96,20 @@ class DataController extends Controller {
                     $item_id = 0;
                 }
 
+                if (isset($item->achievement)) {
+                    $achievement_id = $item->achievement->id;
+                } else {
+                    $achievement_id = 0;
+                }
 
 
                 $n->itemId = $item_id;
                 $n->context = $item->context;
                 $bonuslist = [];
 
-                // print '<pre>';
-                // print_r($item);
-                // print '</pre>';            
+                print '<pre>';
+                print_r($item);
+                print '</pre>';            
 
                 //check if bonuslist exists
                 if (isset($item->bonusLists)) {
@@ -151,6 +162,7 @@ class DataController extends Controller {
                 $n->bonus_1 = $bonus1;
                 $n->bonus_2 = $bonus2;
                 $n->bonus_3 = $bonus3;
+                $n->achievementId = $achievement_id;
                 $n->updated_by = 0;
                 $n->save();
 
