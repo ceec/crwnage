@@ -27,6 +27,12 @@ class DataController extends Controller {
             echo $e;
         }
 
+
+        // print '<pre>';
+        // print_r($test);
+        // print '</pre>';
+        // print '<hr>';
+
         //timestamp is in gmt
 
         //every hour grab the news
@@ -79,7 +85,15 @@ class DataController extends Controller {
 
                 //match from character id
                 $n->user_id = 1;
+
+                // print '<hr><h1>Item</h1>';
+                // print '<pre>';
+                // print_r($item);
+                // print '</pre>';
+                // print '<hr>';
+
                 $n->character = $item->character;
+
 
                 //get the character id from the db
 
@@ -107,9 +121,9 @@ class DataController extends Controller {
                 $n->context = $item->context;
                 $bonuslist = [];
 
-                print '<pre>';
-                print_r($item);
-                print '</pre>';            
+                // print '<pre>';
+                // print_r($item);
+                // print '</pre>';            
 
                 //check if bonuslist exists
                 if (isset($item->bonusLists)) {
@@ -119,9 +133,9 @@ class DataController extends Controller {
 
                 }
 
-                print '<pre>';
-                print_r($bonuslist);
-                print '</pre>';
+                // print '<pre>';
+                // print_r($bonuslist);
+                // print '</pre>';
 
                 unset($bonus);
 
@@ -167,9 +181,6 @@ class DataController extends Controller {
                 $n->save();
 
             }
-
-
-
         }
     }
 
@@ -181,8 +192,6 @@ class DataController extends Controller {
      */
     public function members() {
         //https://us.api.battle.net/wow/guild/Medivh/Temp%20Guild%20Name?fields=members&locale=en_US&apikey=
-
-
         $url = 'https://us.api.battle.net/wow/guild/Durotan/Crwnage%20Crew?fields=members&locale=en_US&apikey=djxg2cdgvh4fcjd3u3ysm2279fgnqx5h';
 
         try {
@@ -192,34 +201,26 @@ class DataController extends Controller {
             echo $e;
         }
 
-
-
         foreach($members->members as $member) {
-
-                    print '<pre>';
-        print_r($member);
-        print '</pre>';
-            $m = new Character;
-            $m->character = $member->character->name;
-            $m->main_id = 0;
-            $m->rank = $member->rank;
-            $m->class_id = $member->character->class;
-            $m->race_id = $member->character->race;
-            $m->gender = $member->character->gender;
-            $m->level = $member->character->level;
-            $m->achievementPoints = $member->character->achievementPoints;
-            $m->thumbnail = $member->character->thumbnail;
-            $m->updated_by = 0;
-            $m->save();
+            //check if its already there
+            $check = Character::where('character','=',$member->character->name)->first();
+            //if its not there need to add it to the database
+            if (!isset($check->id)) {
+                $m = new Character;
+                $m->active = 0;
+                $m->character = $member->character->name;
+                $m->main_id = 0;
+                $m->rank = $member->rank;
+                $m->class_id = $member->character->class;
+                $m->race_id = $member->character->race;
+                $m->gender = $member->character->gender;
+                $m->level = $member->character->level;
+                $m->achievementPoints = $member->character->achievementPoints;
+                $m->thumbnail = $member->character->thumbnail;
+                $m->notes = '';
+                $m->updated_by = 0;
+                $m->save();
+            }
         }
-
-
-
     }
-
-
-
-
-
-
 }
