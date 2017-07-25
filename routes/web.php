@@ -18,9 +18,19 @@ Route::get('/members','DisplayController@members');
 
 
 Route::get('/character/{name}','DisplayController@character');
+
+Route::get('/forum', 'ForumController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+//logged in pages
+
+
+
+
 
 
 //data gathering

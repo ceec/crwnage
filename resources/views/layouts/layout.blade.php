@@ -58,6 +58,7 @@
                 <ul class="nav navbar-nav navbar-right">                           
                   <li><a href="/members">Members</a></li>
                   <li><a href="/forum">Forum</a></li>
+                   <li><a href="/login">Login</a></li>
                    
                                   <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -70,9 +71,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @if (Auth::user()->isAdmin())
-                                <li><a href="{{ url('/home') }}">Admin</a></li>
-                                @endif
+
                                 <li><a href="{{ url('/user/'.Auth::user()->name) }}">Dashboard</a></li>
                                 <li><a href="{{ url('/user/'.Auth::user()->name.'/cards') }}">Cards</a></li>
                                 <li>
